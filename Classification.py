@@ -7,7 +7,7 @@ import nltk
 
 def data_exploration():
     dataset = pd.read_csv("ner_dataset.csv")
-    print("\nNumber of tags", dataset['POS'].copy().drop_duplicates().count())
+    print("\nNumber of tags:", dataset['POS'].copy().drop_duplicates().count())
     print("\nTag Frequency: ")
     print(dataset['POS'].copy().value_counts())
     print('\nWord Frequency:')
@@ -47,6 +47,6 @@ def data_exploration():
 
     rule_tagger = nltk.RegexpTagger(patterns)
     solutions = rule_tagger.tag(dataset['Word'])
-    print("Accuracy, ", sklearn.metrics.accuracy_score(dataset['POS'], [x for (_, x) in solutions]))
+    print("Accuracy: ", sklearn.metrics.accuracy_score(dataset['POS'], [x for (_, x) in solutions]))
 
 data_exploration()
