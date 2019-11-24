@@ -7,17 +7,10 @@ import nltk
 
 def data_exploration():
     dataset = pd.read_csv("ner_dataset.csv")
-    for col in dataset.columns:
-        print(col)
-        print(dataset[col].copy().drop_duplicates().values)
-        print(dataset[col].copy().value_counts())
+    print("Number of tags", dataset['POS'].copy().drop_duplicates().count())
+    print("Frequency of Values: ")
+    print(dataset['POS'].copy().value_counts())
 
-    for value in dataset['Word']:
-        try:
-            if w2n.word_to_num(value):
-                print("CD")
-        except ValueError:
-            pass
 
     patterns = [
         (r'.*ing', 'VBG'),
