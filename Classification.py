@@ -7,9 +7,21 @@ import nltk
 
 def data_exploration():
     dataset = pd.read_csv("ner_dataset.csv")
-    print("Number of tags", dataset['POS'].copy().drop_duplicates().count())
-    print("Frequency of Values: ")
+    print("\nNumber of tags", dataset['POS'].copy().drop_duplicates().count())
+    print("\nTag Frequency: ")
     print(dataset['POS'].copy().value_counts())
+    print('\nWord Frequency:')
+    print(dataset.copy().groupby(["POS", "Word"])['Word'].count().sort_values().groupby(level=0).tail(1))
+    
+    
+    for item in range(0, len(dataset['Word']) - 1):
+        try:
+            if w2n.word_to_num(dataset['Word'][item]):
+               value = w2n.word_to_num(dataset['Word'][item])
+               dataset['Word'][item] = str(value)
+        except ValueError:
+            pass
+
 
     for item in range(0, len(dataset['Word']) - 1):
         try:
